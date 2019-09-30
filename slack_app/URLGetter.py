@@ -3,6 +3,7 @@ from datetime import datetime
 from urlextract import URLExtract
 import tldextract
 import json
+import os
 
 def getURLDomains(text):
     extractor = URLExtract()
@@ -45,7 +46,9 @@ def getDomainsByChannel(key, jsonName):
     writeJSON(jsonName, result)
     
 today = str(datetime.now()).split()[0]
-slack_api_key = API_KEY_HERE
-jsonName = "allChannels_"+today
-
-getDomainsByChannel(slack_api_key, jsonName)
+slack_api_key = os.environ.get("SLACK_API_KEY")
+if slack_api_key:
+    jsonName = "allChannels_"+today
+    getDomainsByChannel(slack_api_key, jsonName)
+else:
+    print("Error: Be sure to set the api key in an environment variable called SLACK_API_KEY")
