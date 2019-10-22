@@ -1,0 +1,20 @@
+{
+    "manifest_version": 2,
+    "name": "Saga-chrome",
+    "description": "A Google Chrome extension for a Wizeline´s project.",
+    "version": "0.1",
+    "permissions": ["activeTab", "declarativeContent","tabs"],
+    "background": {
+        "page": "background.html",
+        "persistent": false
+    },
+    "icons":{
+      "48":"wizeline_icon.png"
+    },
+    "page_action": {
+        "default_popup": "popup.html",
+        "default_icon": "wizeline_icon.png",
+        "default_title": "Press the button if you want to save the URL in the database"
+    },
+    "content_security_policy": "script-src 'self' https://www.gstatic.com/ https://*.firebaseio.com https://www.googleapis.com; object-src 'self'; connect-src 'self' wss://*.firebaseio.com;"
+  }
