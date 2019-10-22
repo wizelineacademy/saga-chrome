@@ -4,7 +4,8 @@ from urlextract import URLExtract
 import tldextract
 import json
 import os
-
+#Given a string, find all the URL domains in it
+#Returns a list of strings with all the domains found
 def getURLDomains(text):
     extractor = URLExtract()
     urls = extractor.find_urls(text)
@@ -14,11 +15,15 @@ def getURLDomains(text):
         domains_list.append(domain)
     return domains_list
 
+#Given a file name and an object or dictionary write a JSON with that file name
 def writeJSON(file_name, object_instance):
     f = open(file_name+".json", "w")
     f.write(json.dumps(object_instance))
     f.close()
 
+#Given a slack key and an output file name, find all domains from URLs sended in all channels
+#Writes a JSON that segments channels, grouped by day and then all the domains with a count of appearances
+# that day in that channel
 def getDomainsByChannel(key, jsonName):
     client = SlackClient(key)
     channels = client.getChannels(True)
